@@ -1,1 +1,25 @@
-<p>por-capital works!</p>
+<h1>Por Capital</h1>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <app-paisinput
+        (onEnter)=" buscar($event) "
+        (onDebounce)=" sugerencias($event) " 
+        placeholder="Buscar capital"
+        >
+        </app-paisinput>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="errorExist" class="alert alert-danger">
+    No se encontro...
+</div>
+
+<div *ngIf="!errorExist" class="row">
+    <div class="col">
+        <app-paistabla [paises]="paises"></app-paistabla>
+    </div>
+</div>
