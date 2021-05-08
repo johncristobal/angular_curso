@@ -1,1 +1,31 @@
-<p>por-region works!</p>
+<h3>Por regino <small> {{ activa | titlecase }}</small></h3>
+
+<hr>
+<div class="row">
+    <div class="col">
+
+        <!-- [class.btn-primary]=" item === activa " -->
+
+        <!-- [ngClass]="{
+            'btn-primary': activa === item,
+            'btn-outline-primary': activa !== item
+        }" -->
+
+        <button *ngFor="let item of regiones"
+            [class]="getClaseCSS(item)"
+            (click)="activarRegion( item )">
+            {{ item | titlecase }}
+        </button>
+
+        <div *ngIf="errorExist" class="alert alert-danger">
+            No se encontro...
+        </div>
+        
+        <div *ngIf="paises.length > 0" class="row">
+            <div class="col">
+                <app-paistabla [paises]="paises"></app-paistabla>
+            </div>
+        </div>
+
+    </div>
+</div>

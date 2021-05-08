@@ -12,6 +12,22 @@
     </div>
 </div>
 
+<ul *ngIf="showSugest" class="list-group">
+    <li *ngFor="let item of sugests" class="list-group-item list-group-item-action">
+        <a class="nav-link" [routerLink]="['/pais',item.alpha2Code]">
+            {{ item.name }}
+        </a>
+    </li>
+
+    <li
+        (click)="buscarTermino(termino)"
+        class="list-group-item list-group-item-action">
+        <a class="nav-link">
+            Buscar: "{{ termino }}"
+        </a>
+    </li>
+</ul>
+
 <hr>
 
 <div *ngIf="errorExist" class="alert alert-danger">
