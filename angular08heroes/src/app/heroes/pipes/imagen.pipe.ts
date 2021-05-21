@@ -7,7 +7,14 @@ import { Heroe } from '../interfaces/heroes.interface';
 export class ImagenPipe implements PipeTransform {
 
   transform(value: Heroe): string {
-    return `assets/heroes/${value.id}.jpg`;
+
+    if(!value.id && !value.alt_image){
+      return `assets/no-image.png`;
+    } else if( value.alt_image) {
+      return value.alt_image;
+    } else {
+      return `assets/heroes/${value.id}.jpg`;
+    }
   }
 
 }
