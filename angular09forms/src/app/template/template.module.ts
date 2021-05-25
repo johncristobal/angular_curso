@@ -5,17 +5,21 @@ import { TemplateRoutingModule } from './template-routing.module';
 import { BasicosComponent } from './components/basicos/basicos.component';
 import { DinamicosComponent } from './components/dinamicos/dinamicos.component';
 import { SwitchesComponent } from './components/switches/switches.component';
+import { FormsModule } from '@angular/forms';
+import { CustomMinDirective } from './directives/custom-min.directive';
 
 
 @NgModule({
   declarations: [
     BasicosComponent,
     DinamicosComponent,
-    SwitchesComponent
+    SwitchesComponent,
+    CustomMinDirective
   ],
-  imports: [
+  imports: [ 
     CommonModule,
-    TemplateRoutingModule
+    TemplateRoutingModule,
+    FormsModule,
   ]
 })
 export class TemplateModule { }
