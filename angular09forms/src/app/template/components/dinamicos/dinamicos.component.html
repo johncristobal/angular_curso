@@ -1,1 +1,97 @@
-<p>dinamicos works!</p>
+
+<h2>Templates dinamicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form (ngSubmit)='guardar()' autocomplete="off" #miForm='ngForm'>
+
+            <!-- Campo de producto --> 
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" 
+                            class="form-control"
+                            placeholder="Nombre persona"
+                            [ngModel]='persona.nombre'
+                            name="nombre"
+                            required
+                            minlength="3"
+                            id="">
+
+                    <span class="form-text text-danger"
+                            *ngIf="miForm.controls.nombre.invalid"
+                            >
+                        Debe ser de 3 letras                        
+                    </span>
+
+                </div>
+            </div>
+            
+            <!-- Agregar -->
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Agregar</label>
+                <div class="col-sm-9">
+
+                    <div class="input-group">
+                        <input
+                        class="form-control"
+                        [(ngModel)]='nuevoJuego'
+                        name="nuevoJuego"
+                        placeholder="Agregar favorito"                           
+                        id=""> 
+
+                        <button 
+                            (click)="agregar()"
+                            class="btn btn-outline-primary">
+                            Agregar
+                        </button>
+                    </div>                    
+
+                </div>
+            </div>
+
+            <!-- Favorito --> 
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Favoritos</label>
+                <div class="col-sm-9">
+
+                    <div class="input-group mb-1"
+                    *ngFor="let item of persona.favoritos; let i = index" >
+                        <input 
+                        [(ngModel)]='item.nombre'
+                        name='favorito_ {{ i }}'
+                        required
+                        class="form-control">
+
+                        <button 
+                            (click)="eliminar(i)"
+                            class="btn btn-outline-danger">
+                            Borrar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                    (click)="guardar()"
+                    [disabled]="miForm.invalid"
+                    class="btn btn-primary float-end">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<span>Data</span>
+<pre>
+    {{ persona | json }}
+</pre>
