@@ -1,1 +1,84 @@
-<p>dinamicos works!</p>
+
+<h2>Templates dinamicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form autocomplete="off" [formGroup]='miForm' (ngSubmit)='guardar()'>
+
+            <!-- Campo de producto --> 
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" 
+                            class="form-control"
+                            formControlName='nombre'
+                            placeholder="Nombre persona">
+
+                    <span class="form-text text-danger"
+                    *ngIf="campoNoValido('nombre')">
+                        Debe ser de 3 letras                        
+                    </span>
+
+                </div>
+            </div>
+            
+            <!-- Agregar -->
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Agregar</label>
+                <div class="col-sm-9">
+
+                    <div class="input-group">
+                        <input
+                        class="form-control"
+                        placeholder="Agregar favorito"                           
+                        id=""> 
+
+                        <button 
+                            class="btn btn-outline-primary">
+                            Agregar
+                        </button>
+                    </div>                    
+
+                </div>
+            </div>
+
+            <!-- Favorito --> 
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Favoritos</label>
+                <div class="col-sm-9" formArrayName='favoritos'>
+
+                    <div class="input-group mb-1"
+                        *ngFor="let item of favoritosArr.controls; let i = index"
+                        >
+                        <input class="form-control"
+                            [formControlName]='i'
+                            >
+
+                        <button class="btn btn-outline-danger">
+                            Borrar
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                    class="btn btn-primary float-end">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<span>Data</span>
+<pre>
+    {{ miForm.value | json }}
+</pre>
