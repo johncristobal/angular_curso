@@ -32,10 +32,12 @@
                     <div class="input-group">
                         <input
                         class="form-control"
-                        placeholder="Agregar favorito"                           
-                        id=""> 
+                        [formControl]="nuevoF"
+                        (keyup.enter)="addNew()"
+                        placeholder="Agregar favorito" > 
 
                         <button 
+                            (click)="addNew()"
                             class="btn btn-outline-primary">
                             Agregar
                         </button>
@@ -56,7 +58,9 @@
                             [formControlName]='i'
                             >
 
-                        <button class="btn btn-outline-danger">
+                        <button 
+                            (click)="borrar(i)"
+                            class="btn btn-outline-danger">
                             Borrar
                         </button>
                     </div>

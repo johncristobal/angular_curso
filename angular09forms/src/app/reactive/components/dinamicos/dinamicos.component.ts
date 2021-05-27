@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dinamicos',
@@ -23,6 +23,8 @@ export class DinamicosComponent implements OnInit {
       ], Validators.required )
   })
 
+  nuevoF: FormControl = this.builder.control('', Validators.required );
+
   get favoritosArr(){
     return this.miForm.get('favoritos') as FormArray;
   }
@@ -30,6 +32,20 @@ export class DinamicosComponent implements OnInit {
   constructor(private builder: FormBuilder) { }
 
   ngOnInit(): void {
+  }
+
+  addNew(){
+    if(this.nuevoF.invalid){
+      return;
+    }
+
+    //this.favoritosArr.push( new FormControl( this.nuevoF.value, Validators.required ) )
+    this.favoritosArr.push( this.builder.control( this.nuevoF.value, Validators.required ) );
+    this.nuevoF.reset( );
+  }
+
+  borrar(indice: number){
+    this.favoritosArr.removeAt(indice);
   }
 
   campoNoValido(campo: string){

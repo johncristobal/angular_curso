@@ -1,7 +1,7 @@
 <h2>Reactivos switches</h2>
 <hr>
 
-<form>
+<form [formGroup]='miForm' (ngSubmit)="guardar()">
 
     <!-- radios -->
     <div class="row mb-3">
@@ -12,7 +12,7 @@
                     class="form-check-input" 
                     type="radio" 
                     value="M"
-                    name="radioGenero" 
+                    formControlName="genero"
                     id="radioMasculino">
                 <label class="form-check-label" for="radioMasculino">
                   Masculino
@@ -23,7 +23,7 @@
                     class="form-check-input" 
                     type="radio" 
                     value="F"
-                    name="radioGenero" 
+                    formControlName="genero"
                     id="radioFemenino">
                 <label class="form-check-label" for="radioFemenino">
                   Femenino
@@ -40,6 +40,7 @@
                 <input 
                     class="form-check-input" 
                     type="checkbox" 
+                    formControlName="noti"
                     id="flexSwitchCheckChecked"
                     >
                 <label class="form-check-label" for="flexSwitchCheckChecked">Recibir notificaciones</label>
@@ -54,8 +55,9 @@
             <div class="form-check">
                 <input 
                     class="form-check-input"
-                    type="checkbox" 
-                    value="" 
+                    type="checkbox"
+                    formControlName="terminos"
+                    value=""
                     id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
                   Terminos y condicion es
@@ -66,7 +68,7 @@
     
     <div class="row">
         <div class="col">
-            <button class="btn btn-primary float-end">
+            <button type="submit" class="btn btn-primary float-end">
                 Guardar
             </button>
         </div>
@@ -74,11 +76,11 @@
 
 </form>
 
-<!-- <span>
+<span>
     <pre>
         {{ miForm.value | json }}
     </pre>
     <pre>
         {{ miForm.valid }}
     </pre>
-</span> -->
+</span>
