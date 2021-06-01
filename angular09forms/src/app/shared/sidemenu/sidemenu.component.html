@@ -22,3 +22,15 @@
         {{item.text}}
     </li>
 </ul>
+
+<h2>Validaciones</h2>
+<hr>
+<ul class="list-group">
+    <li class="list-group-item"
+        [routerLink]='[item.ruta]'
+        *ngFor="let item of rutasAuth"
+        routerLinkActive='active'
+        >
+        {{item.text}}
+    </li>
+</ul>

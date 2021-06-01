@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ReactiveModule } from './reactive/reactive.module';
 import { SharedModule } from './shared/shared.module';
 import { TemplateModule } from './template/template.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TemplateModule } from './template/template.module';
     AppRoutingModule,
     SharedModule,
     ReactiveModule,
-    TemplateModule
+    TemplateModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
