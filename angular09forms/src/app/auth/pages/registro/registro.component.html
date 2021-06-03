@@ -33,7 +33,7 @@
                         name="">
 
                         <span class="text-danger" *ngIf="campoNoValido('email')">
-                            Debe ser correo valido
+                            {{ emailErrorMsg }}
                         </span>
                 </div>
             </div>
@@ -90,7 +90,9 @@
 
             <div class="row">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary float-end"> 
+                    <button type="submit"
+                    [disabled]='miForm.pending'
+                     class="btn btn-primary float-end"> 
                         Crear
                     </button>
                 </div>
