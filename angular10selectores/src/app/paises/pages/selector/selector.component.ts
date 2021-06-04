@@ -16,10 +16,14 @@ export class SelectorComponent implements OnInit {
   miForm: FormGroup = this.builder.group({
     region: ['', Validators.required ],
     pais: ['', Validators.required ],
+    frontera: ['', Validators.required ],
   });
 
   regiones: string[] = [];
   paises: PaisData[] = [];
+  fronteras: string[] = [];
+
+  cargando: boolean = false;
 
   constructor(
     private builder: FormBuilder,
@@ -39,12 +43,28 @@ export class SelectorComponent implements OnInit {
       .pipe(
         tap( ( _ ) => {
           this.miForm.get('pais')?.reset('');
+          this.cargando = true;
         }),
         switchMap( region => this.service.getPaisesRegion( region ))
       )
       .subscribe(paises => {
         this.paises = paises;
+        this.cargando = false;
       })
+
+    this.miForm.get('pais')?.valueChanges
+      .pipe(
+        tap( ( _ ) => {
+          this.fronteras = [];
+          this.cargando = true;
+          this.miForm.get('frontera')?.reset('');
+        }),
+        switchMap( codigo => this.service.getFronteraCode(codigo) )
+      )
+      .subscribe(data => {
+        this.fronteras = data?.borders || [];
+        this.cargando = false;
+      });
   }
 
   llenarRgiones(){

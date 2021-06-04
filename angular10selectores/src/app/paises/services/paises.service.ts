@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { PaisData } from '../interfaces/paises.interface';
+import { Observable, of } from 'rxjs';
+import { FronteraData, PaisData } from '../interfaces/paises.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,14 @@ export class PaisesService {
   getPaisesRegion(region: string): Observable<PaisData[]>{
     const url : string = `${this._baseUrl}/region/${ region }?fields=alpha3Code;name`
     return this.http.get<PaisData[]>(url);
+  }
+
+  getFronteraCode(code: string): Observable<FronteraData | null>{
+    if(!code){
+      return of(null);
+    }
+    const url : string = `${this._baseUrl}/alpha/${ code }`
+    return this.http.get<FronteraData>(url);
   }
 
   constructor(private http: HttpClient) { }
