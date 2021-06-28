@@ -1,1 +1,25 @@
-<p>dona-http works!</p>
+<h1>Dona http</h1>
+<hr>
+
+<div 
+*ngIf="doughnutChartData.length === 0; else divGrafica"
+class="alert alert-info">
+    Cargrando...
+</div>
+
+<div class="row">
+    <div class="col">
+
+        <ng-template #divGrafica>
+        
+        <div style="display: block">
+            <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [colors]='colors'
+              [chartType]="doughnutChartType">
+            </canvas>
+          </div>
+        </ng-template>
+    </div>
+</div>

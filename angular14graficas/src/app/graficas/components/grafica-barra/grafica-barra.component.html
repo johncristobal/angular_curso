@@ -1,1 +1,15 @@
-<p>grafica-barra works!</p>
+<div style="display: block">
+    <canvas baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [legend]="barChartLegend"
+      [chartType]="barChartType">
+    </canvas>
+  </div>
+
+  <button 
+    color="primary" 
+    class="btn btn-primary float-end"
+    (click)="randomize()">Update</button>     
+    
