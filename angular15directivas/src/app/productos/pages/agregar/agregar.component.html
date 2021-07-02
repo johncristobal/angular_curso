@@ -1,27 +1,41 @@
 <h1>Agregar</h1>
 <hr>
 
-<form>
+<form [formGroup]="miForm">
     <div class="row g-3 align-items-center mb-3">
         <div class="col-auto">
             <label class="col-form-label">Nombre: </label>
         </div>
 
         <div class="col-auto">
-            <input class="form-control">
+            <input 
+            formControlName="nombre"
+            class="form-control">
         </div>
 
         <div class="col-auto">
-            <span class="form-text">
-                Este campo es requerido
+            <span 
+            errorMsg
+            [color]="color"
+            [msg]="text"
+            [valido]="!errores('nombre')"
+            class="form-text">
             </span>
         </div>
     </div>
 
     <div class="row mt-5">
         <div class="col">
-            <button class="btn btn-primary">
+            <button 
+            (click)="cambiarText()" 
+            class="btn btn-primary">
                 Guardar
+            </button>
+        </div>
+
+        <div class="col">
+            <button (click)="cambiarColor()" class="btn btn-primary">
+                Color 
             </button>
         </div>
     </div>
@@ -29,6 +43,23 @@
 
 
 
-<h3 class="mt-5">
+<h3 class="mt-5" errorMsg
+color="pink">
     Formualrio
 </h3>
+<span>
+    valida: {{ miForm.valid }}
+</span>
+<span>
+    value: {{miForm.value | json }}
+</span>
+
+<div class="row mt-5" 
+    *customif="miForm.valid"
+    >
+    <div class="col">
+        <div class="alert alert-primary">
+            Todo ok
+        </div>
+    </div>
+</div>
