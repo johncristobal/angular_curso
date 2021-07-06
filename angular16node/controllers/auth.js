@@ -1,6 +1,7 @@
 const { response, request } = require('express');
 const User = require('../models/user');
 const bcryptjs = require("bcryptjs");
+const { generarJWT } = require("../helpers/jwt");
 
 const newUser = async (req = request, res = response) => {
 
@@ -25,7 +26,7 @@ const newUser = async (req = request, res = response) => {
         userNew.password = bcryptjs.hashSync( password, salt );    //ciframos el password
 
         //jwt para metodo auth
-        
+        const jwt = await generarJWT( userNew.id, name);
 
         //salvamos pass
         await userNew.save();
@@ -34,7 +35,8 @@ const newUser = async (req = request, res = response) => {
         return res.json({
             ok: true,
             msg: "Crear usuario new",
-            userNew
+            userNew,
+            jwt
         });
 
     }catch(e){
@@ -47,21 +49,58 @@ const newUser = async (req = request, res = response) => {
 
 };
 
-const loginUser = (req = request, res = response) => {    //login suusario
+const loginUser = async (req = request, res = response) => {    //login suusario
 
     const { email, password } = req.body;    
 
-    return res.json({
-        ok: true,
-        msg: "Login usuario"
-    });
+    try{
+
+        const userDB = await User.findOne( { email });
+        if(!userDB){
+            return res.status(400).json({
+                ok: false,
+                msg: "El correo no existe"
+            });
+        }
+
+        // pass match 
+        const valuePass = await bcryptjs.compareSync( password, userDB.password );
+        if(!valuePass){
+            return res.status(400).json({
+                ok: false,
+                msg: "El password no es valido"
+            });
+        }
+
+        //jwt para metodo auth
+        const jwt = await generarJWT( userDB.id, userDB.name);
+
+        return res.json({
+            ok: true,
+            userDB,
+            jwt
+        });
+
+    }catch( err ){
+        console.log(err);
+        return res.status(500).json({
+            ok: false,
+            msg: "Hable con admin"
+        })
+    }  
 };
 
-const renewToken = (req, res) => {    //validar token
+const renewToken = async (req, res) => {    //validar token
+
+    const { uid, name } = req;
+
+    //jwt para metodo auth
+    const jwt = await generarJWT(  uid, name);
 
     return res.json({
         ok: true,
-        msg: "Token renew"
+        msg: "Token renew",
+        jwt
     });
 };
 
@@ -70,5 +109,3 @@ module.exports = {
     loginUser,
     renewToken
 }
-
-
