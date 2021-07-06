@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"test1\",\n    \"email\": \"test1@gmail.com\",\n    \"password\": \"123456\"\n}",
+					"raw": "{\n    \"name\": \"test3\",\n    \"email\": \"test3@gmail.com\",\n    \"password\": \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -41,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"are@gmail.com\",\n    \"password\": \"123456\"\n}",
+					"raw": "{\n    \"email\": \"test3@gmail.com\",\n    \"password\": \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,7 +66,13 @@
 			"name": "Get renew",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGU0NTg0MzFjNjA5ZjIzOTk2OTU0ODYiLCJuYW1lIjoidGVzdDMiLCJpYXQiOjE2MjU1ODcxNjksImV4cCI6MTYyNTY3MzU2OX0.N0-vFb8BBK20SV_162t1eHn1XuhDWsbhB9S769A7SHY",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "localhost:4000/api/auth/renew",
 					"host": [

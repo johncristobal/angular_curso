@@ -7,11 +7,11 @@ require('dotenv').config();
 //crear server - app express
 const app = express();
 
-//cors
-app.use( cors() );
-
 //lectura y parse de body
 app.use( express.json() );
+
+//cors
+app.use( cors() );
 
 //rutas
 app.use("/api/auth", router);
