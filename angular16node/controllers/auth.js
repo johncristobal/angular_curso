@@ -35,7 +35,7 @@ const newUser = async (req = request, res = response) => {
         return res.json({
             ok: true,
             msg: "Crear usuario new",
-            userNew,
+            userDB: userNew,
             jwt
         });
 
@@ -100,6 +100,10 @@ const renewToken = async (req, res) => {    //validar token
     return res.json({
         ok: true,
         msg: "Token renew",
+        userDB: {
+            _id: uid,
+            name
+        },
         jwt
     });
 };
